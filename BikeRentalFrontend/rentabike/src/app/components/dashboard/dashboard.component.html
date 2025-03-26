@@ -1,0 +1,21 @@
+<div class="dashboard">
+    <h2> Available Bikes</h2>
+    <div class="bike-list">
+        <div *ngFor="let bike of bikes" class="bike-card">
+            <h3>{{bike.brand}} - {{bike.model}}</h3>
+            <p><strong>Transmission:</strong> {{bike.transmission}}</p>
+            <p><strong>Rate:</strong> {{bike.hourlyRate}}</p>            
+            <p><strong>Description:</strong> {{bike.description}}</p>
+            <p><strong>Status:</strong>
+            {{bike.status}}
+            </p>
+            <div class="text-center">
+                <br>
+                <!-- Use Angular's routerLink directive with dynamic bikeId -->
+                <a href="/bookings">Book Now!</a>
+              </div>
+              
+          
+    </div>
+</div>
+<router-outlet></router-outlet>
