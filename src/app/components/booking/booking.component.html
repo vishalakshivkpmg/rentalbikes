@@ -1,0 +1,19 @@
+<div class="p-6 max-w-md mx-auto bg-white rounded-xl shadow-md space-y-4">
+  <h2 class="text-2xl font-bold">Book a Bike</h2>
+  
+  <form [formGroup]="bookingForm" (ngSubmit)="submitBooking()">
+    <label class="block mb-2">From Date & Time:</label>
+    <input type="datetime-local" formControlName="from_time" class="border p-2 rounded mb-4 w-full" />
+
+    <label class="block mb-2">To Date & Time:</label>
+    <input type="datetime-local" formControlName="to_time" class="border p-2 rounded mb-4 w-full" />
+
+    <label class="block mb-2">Total Price:</label>
+    <input type="number" formControlName="total_price" class="border p-2 rounded mb-4 w-full" />
+
+    <div class="text-center">
+      <br>
+      <a href="/my_bookings">Confirm</a>
+    </div>
+  </form>
+</div>

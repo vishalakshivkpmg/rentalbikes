@@ -1,0 +1,10 @@
+<div class="p-4">
+  <h1>My Bookings</h1>
+  <div *ngIf="bookings.length === 0">No bookings found.</div>
+    <div *ngFor="let booking of bookings" class="card">
+    <p>From: {{booking.from_date}}-{{ booking.from_time }}</p>
+    <p>To: {{booking.to_date}}-{{ booking.to_time }}</p>
+    <p>Total Price: ₹{{ booking.total_price }}</p>
+    <p>Status: {{ booking.status }}</p>
+    </div>
+</div>
