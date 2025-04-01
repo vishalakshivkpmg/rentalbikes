@@ -1,6 +1,5 @@
 package com.example.rentalbikesbackend.entities;
 
-import com.example.rentalbikesbackend.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -11,7 +10,7 @@ public class User {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="name")
+    @Column(name="name", unique = true)
     private String name;
     @Column(name="email")
     private String email;

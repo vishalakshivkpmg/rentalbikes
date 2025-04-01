@@ -18,5 +18,7 @@ public class Bike {
     private String transmission;
     private String status;
     private String description;
+    private String image;
+
 
 }

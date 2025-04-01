@@ -19,14 +19,14 @@ public class UserController {
     public User registerUser(@RequestBody User user){
         return userService.registerUser(user);
     }
-    @GetMapping("/{email}")
-    public User getUserByEmail(@PathVariable String email){
-        return userService.getUserByEmail(email);
+    @GetMapping("/{name}")
+    public User getUserByName(@PathVariable String name){
+        return userService.getUserByName(name);
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody User user){
-        User existingUser = userService.getUserByEmail(user.getEmail());
+        User existingUser = userService.getUserByName(user.getName());
         if (existingUser != null && existingUser.getPassword().equals(user.getPassword())){
             return  ResponseEntity.ok(Map.of("Message",
                     "Login Successfully!", "user", existingUser));

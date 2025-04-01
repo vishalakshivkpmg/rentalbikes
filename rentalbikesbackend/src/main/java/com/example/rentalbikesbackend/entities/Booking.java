@@ -4,23 +4,34 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity@Getter @Setter
-@Table(name="booking")
+import java.time.LocalDateTime;
+
+@Entity
+@Getter
+@Setter
+@Table(name = "booking")
 public class Booking {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String fromTime;
-    private String toTime;
+    @Column(name = "from_datetime")
+    private LocalDateTime fromDateTime;
+
+    @Column(name = "to_datetime")
+    private LocalDateTime toDateTime;
+
     private double totalPrice;
-    private String status="pending";
+
+    @Column(nullable = false)
+    private String status = "pending";
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
+
     @ManyToOne
-    @JoinColumn(name="bike_id")
+    @JoinColumn(name = "bike_id")
     private Bike bike;
 }
