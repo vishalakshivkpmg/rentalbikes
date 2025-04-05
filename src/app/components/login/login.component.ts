@@ -11,24 +11,26 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./login.component.css']  // Corrected here
 })
 export class LoginComponent {
-  name: string = '';
+  email: string = '';
   password: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
   login() {
-    const user = { name: this.name, password: this.password };
+    const user = { email: this.email, password: this.password };
     console.log('Sending login request:', user);
     
     this.authService.login(user).subscribe({
       next: (response) => {
         console.log('Login successful!', response);
         // Optionally store a token or user data if your backend sends it
-        if (response.token) {
-          localStorage.setItem('authToken', response.token);
-        }
+        // if (response.token) {
+          // localStorage.setItem('authToken', response.token);
+        // }
+        // Store only user ID in local storage
+        localStorage.setItem('userId', response.user.id);
         alert('Login Successful!');
-        this.router.navigate(['/dashboard']);  // Navigates to dashboard on success
+        this.router.navigate(['user/dashboard']);  // Navigates to dashboard on success
       },
       error: (err) => {
         console.error('Login error:', err);
@@ -41,6 +43,6 @@ export class LoginComponent {
 
   onRegister() {
     console.log('Register button clicked');
-    this.router.navigate(['/register']);
+    this.router.navigate(['user/register']);
   }
 }

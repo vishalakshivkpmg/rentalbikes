@@ -1,0 +1,29 @@
+<app-header></app-header>
+
+<div class="orders-container">
+  <h2>All Bookings</h2>
+  <div *ngIf="allBookings.length === 0">No bookings found.</div>
+
+  <table *ngIf="allBookings.length > 0">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Bike</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Total Price</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let booking of allBookings">
+        <td>{{ booking.user.name }}</td>
+        <td>{{ booking.bike.brand }} {{ booking.bike.model }}</td>
+        <td>{{ booking.fromDateTime }}</td>
+        <td>{{ booking.toDateTime }}</td>
+        <td>₹{{ booking.totalPrice }}</td>
+        <td [ngStyle]="{'color': booking.status === 'Cancelled' ? 'red' : 'green'}">{{ booking.status }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

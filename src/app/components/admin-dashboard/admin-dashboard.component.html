@@ -1,0 +1,47 @@
+<app-admin-header></app-admin-header>
+
+<input
+    type="text"
+    placeholder="Search"
+    [(ngModel)]="searchQuery"
+    (input)="searchBikes()"
+    class="p-2 border border-gray-300 rounded w-full mb-4"
+  />
+
+<div class="bike-carousel">
+    <!-- Carousel for Bikes -->
+    <p-carousel [value]="filteredBikes" [numVisible]="3" [numScroll]="3" [circular]="true">
+        <ng-template let-bike pTemplate="item">
+            <!-- Opening div for bike-card -->
+            <div class="bike-card border rounded m-2 p-4">
+                <!-- Bike Image -->
+                <div class="bike-image mb-2">
+                    <img [src]="'asset/' + bike.image" alt="{{ bike.model }}" class="bike-image">
+                </div>
+                <!-- Bike Model -->
+                <div class="bike-name font-medium mb-2">{{ bike.model }}</div>
+                <!-- Bike Brand -->
+                <div class="bike-brand mb-1">Brand: {{ bike.brand }}</div>
+                <!-- Transmission -->
+                <div class="bike-transmission mb-1">Transmission: {{ bike.transmission }}</div>
+                <!-- Bike Status -->
+                <div class="bike-status mb-1">Status: {{ bike.status }}</div>
+                <!-- Hourly Rate -->
+                <div class="bike-rate mt-2 font-bold text-lg">Hourly Rate: ₹{{ bike.hourlyRate }}</div>
+                <!-- Description -->
+                <div class="bike-description mt-2 text-gray-600">{{ bike.description }}</div>
+                <!-- Rent Now Button -->
+                <div class="text-center">
+                    <button class="bg-yellow" type="button" >
+                        Edit
+                    </button>
+                    <button class="bg-red" type="button" >
+                        Delete
+                    </button>
+                </div>
+            </div> <!-- Closing div for bike-card -->
+        </ng-template>
+    </p-carousel>
+</div> <!-- Closing div for bike-carousel -->
+
+<router-outlet></router-outlet>

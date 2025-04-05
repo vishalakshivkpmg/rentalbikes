@@ -1,0 +1,14 @@
+<app-header></app-header>
+<div *ngIf="user" class="profile-container">
+    <h2>User Profile</h2>
+    <div class="profile-card">
+      <p><strong>Name:</strong> {{ user.name }}</p> 
+      <p><Strong>Email:</Strong>{{user.email}}</p>
+      <p><strong>Phone:</strong> {{ user.phone }}</p>
+      <p><strong>Address:</strong> {{ user.address }}</p>
+    </div>
+    <div class="text-center">
+        <br>
+        <a href="user/edit">Edit Profile!</a>
+      </div>
+  </div>

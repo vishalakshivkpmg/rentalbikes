@@ -1,10 +1,42 @@
-<div class="p-4">
-  <h1>My Bookings</h1>
-  <div *ngIf="bookings.length === 0">No bookings found.</div>
-    <div *ngFor="let booking of bookings" class="card">
-    <p>From: {{booking.from_date}}-{{ booking.from_time }}</p>
-    <p>To: {{booking.to_date}}-{{ booking.to_time }}</p>
-    <p>Total Price: ₹{{ booking.total_price }}</p>
-    <p>Status: {{ booking.status }}</p>
-    </div>
+
+<app-header></app-header>
+  
+  <div class="booking-list">
+    <h2>My Bookings</h2>
+    <div *ngIf="userBookings.length === 0">No bookings available.</div>
+    <table>
+        <thead>
+            <tr>
+                <th class="padding">From</th>
+                <th class="padding">To</th>
+                <th class="padding">Total Price</th>
+                <th class="padding">Status</th>
+                <th class="padding">Bike</th>
+                <th class="padding">Booking Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let booking of userBookings">
+                <td class="padding">{{ booking.fromDateTime }}</td>
+                <td class="padding">{{ booking.toDateTime }}</td>
+                <td class="padding">₹{{ booking.totalPrice }}</td>
+                <td class="padding" [ngStyle]="{'color': booking.status === 'pending' ? 'red' : 'green'}">
+                    {{ booking.status }}
+                </td>
+                <td class="padding">{{ booking.bike.brand }} {{ booking.bike.model }}</td>
+                <td class="button">
+                    <button 
+                      *ngIf="booking.status !== 'Cancelled'" 
+                      (click)="cancelBooking(booking.id!)" 
+                      class="cancel-btn">
+                      Cancel Booking
+                    </button>
+                    <span *ngIf="booking.status === 'Cancelled'" class="cancelled-text">
+                      Booking Cancelled
+                    </span>
+                  </td>
+                  
+            </tr>
+        </tbody>
+    </table>
 </div>

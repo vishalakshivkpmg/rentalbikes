@@ -1,10 +1,14 @@
+
+
 .bike-carousel {
-    width: 100%; /* or set a specific width, like 1200px */
     overflow: hidden; /* Prevent content from spilling out */
+    width: 100%;
 }
+
+
 .bike-image img {
     width: 100%; /* Ensure the image takes up the full width of the container */
-    height: 200px; /* Set a fixed height */
+    max-height: 200px; /* Set a fixed height */
     object-fit: contain; /* Ensures the image scales properly without distortion */
     border-radius: 8px; /* Optional: Adds rounded corners */
 }

@@ -6,62 +6,65 @@ import { error } from 'console';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CarouselModule } from 'primeng/carousel';
+import { HeaderComponent } from '../header/header.component';
+import { BikeService } from '../../service/bike.service'; // Import the service
 
+interface Bike {
+  id: number;
+  brand: string;
+  model: string;
+  transmission: string;
+  hourly_rate: number;
+  description: string;
+  status: string;
+}
 
 @Component({
   selector: 'app-dashboard',
-  imports: [RouterModule, FormsModule, CommonModule, CarouselModule],
+  imports: [RouterModule, FormsModule, CommonModule, CarouselModule, HeaderComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
+  
 })
 export class DashboardComponent implements OnInit {
-  userId: number=0;// Store user information
-  bikes: any[] = [];  // Array to store bike details
-   // Array to store the bikes that are already booked by the user
+  bikes: Bike[] = [];
+  filteredBikes: Bike[] = [];
+  searchQuery: string = '';  
 
-  constructor( // To fetch booking information
-    private authService: AuthService,
-    private http:HttpClient,
-    private router:Router, // For user authentication data
-  ) {}
+  constructor(
+    private bikeService : BikeService ,
+    private http: HttpClient, 
+    private router: Router) {}
 
   ngOnInit(): void {
-    this.userId=this.authService.getUserId();
-    this.loadBikes();  
-    console.log(this.bikes); 
+    this.fetchBikes();
+  }
+
+  fetchBikes(): void {
+    this.bikeService.getAllBikes().subscribe({
+      next: (data) => {
+        this.bikes = data;
+        this.filteredBikes = data; // Initialize filteredBikes with all bikes
+      },
+      error: (err) => console.error('Error fetching bikes:', err)
+    });
+  }
+
+  bookBike(bikeId: number): void {
+    this.router.navigate(['user/booking'], { queryParams: { bikeId } });
+  }
+  searchBikes() {
+    const query = this.searchQuery.toLowerCase();
+    this.filteredBikes = this.bikes.filter(bike =>
+      bike.brand.toLowerCase().includes(query) ||
+      bike.model.toLowerCase().includes(query) ||
+      bike.transmission.toLowerCase().includes(query)
+    );
     
-  }
+    // Display all bikes if search query is empty
+    if (!query) {
+      this.filteredBikes = this.bikes;
+    }
+}
 
-  loadBikes(){
-    this.http.get('http://localhost:8084/bikes').subscribe((
-      response: any) => {
-        this.bikes=response;
-      }, error => {
-        console.error('Error fetching bikes',error);
-      });
-  }
-
-  bookBike(bikeId: number) {
-    const bookingRequest = {
-      bikeId: bikeId,
-      userId: this.userId,
-      fromTime: new Date(),
-      toTime: new Date(new Date().getTime() + (2 * 60 * 60 * 1000)), // booking for 2 hours ahead
-    };
-  
-    // Correct URL interpolation
-    this.http.post('http://localhost:8084/bookings', bookingRequest)
-      .subscribe(response => {
-        alert('Booking Successful!');
-        this.loadBikes();
-      }, error => {
-        alert('Booking Failed: ' + error.error);
-      });
-  }
-  
-  // Logout the user
-  logout(): void {
-    this.authService.logout();
-    this.router.navigate(['/login']);
-  }
 }

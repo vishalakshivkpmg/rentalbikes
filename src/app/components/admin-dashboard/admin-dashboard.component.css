@@ -1,0 +1,71 @@
+
+
+.bike-carousel {
+    width: 100vw; /* or set a specific width, like 1200px */
+    overflow: hidden; /* Prevent content from spilling out */
+    padding: 0 40px;
+    
+}
+
+.grid-class{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.bike-image img {
+    width: 100%; /* Ensure the image takes up the full width of the container */
+    max-height: 200px; /* Set a fixed height */
+    object-fit: contain; /* Ensures the image scales properly without distortion */
+    border-radius: 8px; /* Optional: Adds rounded corners */
+}
+
+.bike-card:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+}
+
+/* Typography for Card Text */
+.bike-name {
+    font-size: 18px; /* Slightly larger text for emphasis */
+    font-weight: bold;
+    color: #333; /* Dark text for readability */
+    margin-bottom: 8px;
+}
+
+.bike-brand,
+.bike-transmission,
+.bike-status,
+.bike-rate,
+.bike-description {
+    font-size: 14px; /* Smaller text for supplementary details */
+    color: #555; /* Medium color for contrast */
+    margin-bottom: 4px;
+}
+
+.bike-rate {
+    color: #e74c3c; /* Highlight the rate with a distinct color */
+    font-weight: bold;
+}
+
+.bike-description {
+    font-style: italic; /* Optional for distinction */
+    color: #777; /* Lighter shade for description */
+}
+
+/* Styling for 'Book Now' Button */
+.bike-card a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #3498db; /* Eye-catching blue */
+    color: #fff; /* White text */
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px; /* Rounded button */
+    transition: background-color 0.3s ease;
+}
+
+.bike-card a:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+

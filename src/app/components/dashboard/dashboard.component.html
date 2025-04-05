@@ -1,33 +1,16 @@
-<!--
-<div class="dashboard">
-    <h2> Available Bikes</h2>
-    <div class="bike-list">
-        <div *ngFor="let bike of bikes" class="bike-card">
-            <h3>{{bike.brand}} - {{bike.model}}</h3>
-            <p><strong>Transmission:</strong> {{bike.transmission}}</p>
-            <p><strong>Rate:</strong> {{bike.hourlyRate}}</p>            
-            <p><strong>Description:</strong> {{bike.description}}</p>
-            <p><strong>Status:</strong>
-            {{bike.status}}
-            </p>
-            <div class="text-center">
-                <br>
-                <-- Use Angular's routerLink directive with dynamic bikeId -->
-                 <!--
-                <a href="/bookings">Book Now!</a>
-            </div>        
-    </div>
-</div>
-<router-outlet></router-outlet>
--->
+<app-header></app-header>
 
+<input
+    type="text"
+    placeholder="Search"
+    [(ngModel)]="searchQuery"
+    (input)="searchBikes()"
+    class="p-2 border border-gray-300 rounded w-full mb-4"
+  />
 
-
-<!-- above part is commented -->
-<!-- below part added by poornima -->
 <div class="bike-carousel">
     <!-- Carousel for Bikes -->
-    <p-carousel [value]="bikes" [numVisible]="3" [numScroll]="3" [circular]="true">
+    <p-carousel [value]="filteredBikes" [numVisible]="3" [numScroll]="3" [circular]="true">
         <ng-template let-bike pTemplate="item">
             <!-- Opening div for bike-card -->
             <div class="bike-card border rounded m-2 p-4">
@@ -49,7 +32,9 @@
                 <div class="bike-description mt-2 text-gray-600">{{ bike.description }}</div>
                 <!-- Rent Now Button -->
                 <div class="text-center">
-                    <a href="/bookings">Book Now!</a>
+                    <button type="button" (click)="bookBike(bike.id)" [disabled]="bike.status !== 'Available'">
+                        Rent Now
+                    </button>
                 </div>
             </div> <!-- Closing div for bike-card -->
         </ng-template>

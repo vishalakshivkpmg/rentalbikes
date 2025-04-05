@@ -1,2 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'C:/Users/Administrator/Desktop/Rentabike/BikeRentalFrontend/rentabike/node_modules/bootstrap/dist/css/bootstrap.min.css';
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* @import "tailwind-import.css"; */
+
+/* // Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming */
+@use '@angular/material' as mat;
+@use './styles/theme/color/_theme-colors.scss' as themeColor;
+
+html {
+  /*@include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));*/
+  @include mat.theme((
+    color: (
+      primary: themeColor.$primary-palette,
+      tertiary: themeColor.$tertiary-palette,
+      theme-type: light,
+    ),
+    typography: Roboto,
+    density: -1,
+  ));
+}/* You can add global styles to this file, and also import other style files */
+
+/* // some bug in material & tailwind combination */
+.mat-mdc-notch-piece{
+  border: none;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-error {
+  @include mat.theme((color:themeColor.$error-palette));
+}
+
+.mat-warn {
+  @include mat.theme((color:themeColor.$warn-palette));
+}

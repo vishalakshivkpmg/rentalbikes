@@ -1,19 +1,48 @@
-<div class="p-6 max-w-md mx-auto bg-white rounded-xl shadow-md space-y-4">
-  <h2 class="text-2xl font-bold">Book a Bike</h2>
-  
-  <form [formGroup]="bookingForm" (ngSubmit)="submitBooking()">
-    <label class="block mb-2">From Date & Time:</label>
-    <input type="datetime-local" formControlName="from_time" class="border p-2 rounded mb-4 w-full" />
-
-    <label class="block mb-2">To Date & Time:</label>
-    <input type="datetime-local" formControlName="to_time" class="border p-2 rounded mb-4 w-full" />
-
-    <label class="block mb-2">Total Price:</label>
-    <input type="number" formControlName="total_price" class="border p-2 rounded mb-4 w-full" />
-
-    <div class="text-center">
-      <br>
-      <a href="/my_bookings">Confirm</a>
+<div class="booking-container">
+    <h2>Bike Booking</h2>
+    
+    <!-- Bike Details -->
+    <div class="bike-details">
+        <h3>Bike Information</h3>
+        <p><strong>Brand:</strong> {{ bike.brand }}</p>
+        <p><strong>Model:</strong> {{ bike.model }}</p>
+        <p><strong>Hourly Rate:</strong> ₹{{ bike.hourlyRate }}</p>
     </div>
-  </form>
-</div>
+
+    <!-- Booking Form -->
+    <form (ngSubmit)="confirmBooking()">
+        <h3>Booking Details</h3>
+
+        <div class="form-group">
+            <label for="from_date">From Date</label>
+            <input type="date" id="from_date" [(ngModel)]="booking.from_date" name="from_date" required />
+        </div>
+
+        <div class="form-group">
+            <label for="from_time">From Time</label>
+            <input type="time" id="from_time" [(ngModel)]="booking.from_time" name="from_time" required />
+        </div>
+
+        <div class="form-group">
+            <label for="to_date">To Date</label>
+            <input type="date" id="to_date" [(ngModel)]="booking.to_date" name="to_date" required />
+        </div>
+
+        <div class="form-group">
+            <label for="to_time">To Time</label>
+            <input type="time" id="to_time" [(ngModel)]="booking.to_time" name="to_time" required />
+        </div>
+
+        <button type="button" (click)="calculatePrice()" class="p-button-primary">
+            Calculate Price
+        </button>
+
+        <div class="form-group">
+            <label>Total Price: </label>
+            <span>₹{{ booking.total_price }}</span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Confirm</button>
+    </form>
+</div> 
+

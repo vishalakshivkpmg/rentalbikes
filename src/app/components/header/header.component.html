@@ -1,0 +1,15 @@
+<mat-toolbar color="primary" class="w-full headerU mat-elevation-z4" style="justify-content: space-between;">
+  <!-- Left: Logo and Title -->
+  <div style="display: flex; align-items: center;">
+    <img src="assets/logo.png" alt="Logo" width="40" height="40" style="margin-right: 10px;" />
+    <span style="font-size: 20px; font-weight: bold;">Rent a Bike</span>
+  </div>
+
+  <!-- Right: Navigation Buttons -->
+  <div>
+    <button mat-raised-button color="accent" routerLink="/user/dashboard" class="mx-2">Dashboard</button>
+    <button mat-raised-button color="accent" routerLink="/user/my-bookings" class="mx-2">My Booking</button>
+    <button mat-raised-button color="accent" routerLink="/user/profile" class="mx-2">Profile</button>
+    <button mat-raised-button color="warn" (click)="logout()" class="mx-2">Logout</button>
+  </div>
+</mat-toolbar>
